@@ -5,26 +5,60 @@
 <link rel="stylesheet" type="text/css" href="external.css">
 <style>
   /*internal css*/
-body {
-  background-color: linen;
+  p {color: red;}
+  span{
+    display:block;
+  }
+  li{
+    display:inline;
+  }
+  h1.hidden {
+  display: none;
+ 
+    div.relative {
+  position: relative;
+  left: 30px;
+  border: 3px solid #73AD21;
 }
+   div.relative {
+  position: relative;
+  width: 400px;
+  height: 200px;
+  border: 3px solid #73AD21;
+} 
 
-h1 {
-  color: maroon;
-  margin-left: 40px;
+div.absolute {
+  position: absolute;
+  top: 80px;
+  right: 0;
+  width: 200px;
+  height: 100px;
+  border: 3px solid #73AD21;
 }
-</style>
-</head>
-<body>
-
-<h1>This is a heading</h1>
-<p>This is a paragraph.</p>
-
-<!--internal css-->
-<h1 style="color:blue;text-align:center;">This is a heading</h1>
-<p style="color:red;">This is a paragraph.</p>
-<div>
-  <p> Hello </p>
-  </div>
+   div.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 5px;
+  background-color: #cae8ca;
+  border: 2px solid #4CAF50;
+} 
+    </style> 
+  </head>
+  <body>
+    <!--inline css-->
+    <p style="color: blue;">hello, github.io</p>
+    <img src="" alt="">
+    <div>
+      <p>hello</p>
+    </div>
+    <h1>This is a visible heading</h1>
+    <h1 class="hidden">This is a hidden heading</h1>
+    <span>Notice that the h1 element with display:</span><span> none; does not take up any space</span>
+<ul>
+  <li><a href="/html/default.asp" target="_blank">HTML</a></li>
+  <li><a href="/css/default.asp" target="_blank">CSS</a></li>
+  <li><a href="/js/default.asp" target="_blank">JavaScript</a></li>
+</ul>
 </body>
 </html>
