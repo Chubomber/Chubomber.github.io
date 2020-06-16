@@ -1,43 +1,103 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link href="clubMeNow.png" rel="icon" type="image/png"/>
+		<title>ClubMeNow - Club Distances</title>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>ClubMeNow:Lite - Club Distances</title>
-	<link rel="icon" href="clubMeNow300x300.png" type="image/png" />
-	<!-- Bootstrap CSS -->
-	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css' />
-	<!-- ClubMeNow custom CSS -->
-	<link rel='stylesheet' href='clubMeNow.css' />
-</head>
+		<!-- Bootstrap 3 -->
+		<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/> -->
+		<link href="https://atg973.github.io/bs3/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script> -->
+		<script src="https://atg973.github.io/bs3/jquery.min.js" type="text/javascript"></script>
+		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script> -->
+		<script src="https://atg973.github.io/bs3/bootstrap.min.js" type="text/javascript"></script>
 
-<body onload='appendTableRows();'>
-<div class='container'>
-	<h1>Club Distances</h1>
-	<table id='clubTable' class='table table-striped'>
-		<tr>
-		  <th class='cmn_hidden'>Club</th>
-		  <th class='cmn_alignRight cmn_fullHeight'>Avg</th>
-		  <th class='cmn_alignRight cmn_hidden'>Min</th>
-		  <th class='cmn_alignRight cmn_fullHeight'>Max</th>
-		  <th class='cmn_alignRight cmn_hidden'>Num</th>
-		  <th class='cmn_fullHeight'></th>
-		  <th class='cmn_fullHeight'>Club <button class='btn btn-warning cmn_noPadding cmn_fullHeight' onclick='displayClubEntry();'>&nbsp;&nbsp;+&nbsp;&nbsp;</button></th>
-		</tr>
-	</table>
-	<button class='btn btn-warning' onclick='undoLastShot();'>Undo</button> 
-	<button class='btn btn-danger' onclick='resetAllClubDistances();'>Reset</button> 
-	<button class='btn btn-info' onclick='displayAbout();'>About</button> 
-	<br>
-	<br>
-	<footer>Copyright &copy;2019 George Corser</footer>
-</div>
-<!-- Bootstrap JS -->
-<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
-<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js'></script>
-<!-- ClubMeNow custom JS -->
-<script src='clubMeNow.js'></script>
-<script>var clubs = loadClubDistances(); </script>
+		<!-- F.A. Icons -->
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+		<!-- <link href="https://atg973.github.io/font-awesome.min.css" rel="stylesheet" type="text/css"/> -->
+		
+		<!-- ClubMeNow Custom CSS -->
+		<link href="clubMeNow.css" rel="stylesheet"/>
+	</head>
+	<body onload="appendTableRows();">
 
-</body>
+		<div id="container" class="container">
+			
+			<h1>Club Distances</h1>
+			<!-- <br> -->
+			<div id="mobileMode" class="btn btn-default" onclick="$('div#container').toggleClass('mobileMode');">
+				<i class="fa fa-laptop"></i>
+				<i class="fa fa-toggle-off switch"></i>
+				<i class="fa fa-toggle-on switch"></i>
+				<i class="fa fa-tablet" style="padding:0 .1em;"></i>
+				<br>
+			</div>
+			
+			<div style="text-align:center; display:none; margin-bottom:.5em;">
+				<a href="newClub.html">New Club</a>
+				<a href="newDistance.html">New Distance</a>
+			</div>
+
+			<table id="clubTable" class="table table-striped">
+				<tr>
+					<th class="CMN_hidden">Club</th>
+					<th class="CMN_fullHeight CMN_right">Avg</th>
+					<th class="CMN_right CMN_hidden">Min</th>
+					<th class="CMN_fullHeight CMN_right">Max</th>
+					<th class="CMN_right CMN_hidden">Num</th>
+					<th class="CMN_fullHeight"></th>
+					<th class="CMN_fullHeight">Club Name</th>
+				</tr>
+				<tr>
+					<td colspan="7">
+						<button class="btn btn-warning CMN_noPadding CMN_fullHeight" onclick="newClubEntry();" style="width:100%; padding:.5em;">Add Club</button>
+					</td>
+				</tr>
+				<!-- <tr>
+					<td>Club Abbrev</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+					<td>
+						<button class="btn btn-success CMN_noPadding CMN_fullHeight" onclick="newDistanceEntry();">&plus;</button>
+					</td>
+					<td>Club Name</td>
+				</tr> -->
+			</table>
+
+			<div class="buttonBox">
+				<button class="btn btn-warning" onclick="undoLastShot();">Undo</button>
+				<button class="btn btn-danger" onclick="resetDistanceList();">Reset</button>
+				<button class="btn btn-info" onclick="displayAbout();">About</button>
+			</div>
+
+			<a href="golfScorecards.html">Golf Scorecards</a>
+
+			<hr>
+
+			<footer>
+				<p>
+					CIS 255 (Spring 2020)<br>
+					Saginaw Valley State University<br>
+					Copyright &copy; 2019 George Corser
+				</p>
+			</footer>
+
+		</div>
+
+		<!-- ClubMeNow Custom JS -->
+		<script src="clubMeNow.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			var clubs = loadDistanceList();
+
+			// Ask the user if they would prefer the mobile version of the app. 
+			// var mobileMode = confirm('Load mobile mode ?')
+			// if(mobileMode) document.getElementById('container').classList.add('mobileMode')
+		</script>
+
+	</body>
 </html>
 
