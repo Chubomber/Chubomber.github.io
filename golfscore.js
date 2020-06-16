@@ -1,132 +1,228 @@
-// assign the table row for hole 1 to a variable
-//var elem
-//  = document.getElementById("1");
-// display the number of children (all td elements)
-//console.log(elem.children.length);
-// display the content of the + button, which is the first child of the fifth element
-//console.log(elem.children[4].children[0]); 
-// assign a function to the + button
-//elem.children[4].children[0].onclick 
- // = function(){add1(elem);};
-//elem.children[4].children[1].onclick 
-  //= function(){subtract1(elem);};
+// ----- Functions (clubDistanceList.html) -----
+// possible features to add: reset one specific club, add/remove a club,
+// multiple "undo" (undo history), add "confirm" before reset/undo,
+// histogram of club distances,
+// move Bootstrap files to local subdirectory so works if no Internet
 
-// you don't have to define the function before you use it! 
-function add1 (num) {
-var x = document.getElementById(num);
-  if(x.children[2].innerHTML == "-"){
-    x.children[2].innerHTML = "1";
-    x.children[3].innerHTML = "-3";
-  } 
-  else {
-    let currentScore = x.children[2].innerHTML;
-    currentScore = Number.parseInt(currentScore);
-    x.children[2].innerHTML = currentScore + 1;
-    x.children[3].innerHTML = currentScore -3;
+
+// initialize "clubs" array
+function loadClubDistances() {
+	// if "clubs" array already exists, load it from local storage
+	if (localStorage.getItem("clubs")) {
+		clubs = JSON.parse(localStorage.getItem("clubs"));
+	}
+	// otherwise create new "clubs" array, using resetAllClubs()
+	else {
+		resetAllClubDistances();
+		clubs = JSON.parse(localStorage.getItem("clubs"));
   }
-  var count = 1;
-  var all = 0;
-  var par = 0;
-  var score = 0;
-  var over = 0;
-  var curr = document.getElementById("1");
-  while(count <= 18){
-    curr = document.getElementById(count);
-
-    if(curr.children[2].innerHTML == "-"){
-
-    }
-    else{
-        all += 1;
-        par = par + Number.parseInt(curr.children[1].innerHTML);
-        score = score + Number.parseInt(curr.children[2].innerHTML);
-        over = over + Number.parseInt(curr.children[3].innerHTML);
-    }
-    count++;
-  }
-  var z = document.getElementById("Total");
-  z.children[0].innerHTML = all;
-  z.children[1].innerHTML = par;
-  z.children[2].innerHTML = score;
-  z.children[3].innerHTML = over;
+  return clubs;
   
 }
 
-function subtract1 (num2) {
-    var y = document.getElementById(num2)
-  if(y.children[2].innerHTML == "-"){
-     y.children[2].innerHTML = "-1";
-     y.children[3].innerHTML = "-5";
-  }
-  else {
-    let currentScore = y.children[2].innerHTML;
-    currentScore = Number.parseInt(currentScore);
-    y.children[2].innerHTML = currentScore - 1;
-    y.children[3].innerHTML = currentScore - 5;
-    }
-    var count2 = 1;
-  var all2 = 0;
-  var par2= 0;
-  var score2 = 0;
-  var over2 = 0;
-  var currEl = document.getElementById("1");
-  while(count2 <= 18){
-    currEl = document.getElementById(count2);
-    if(currEl.children[2].innerHTML == "-"){
-
-    }
-    else{
-        all2 += 1;
-        par2 = par2 + Number.parseInt(currEl.children[1].innerHTML);
-        score2 = score2 + Number.parseInt(currEl.children[2].innerHTML);
-        over2 = over2 + Number.parseInt(currEl.children[3].innerHTML);
-    }
-    count2++;
-  }
-  var j = document.getElementById("Total");
-  j.children[0].innerHTML = all2;
-  j.children[1].innerHTML = par2;
-  j.children[2].innerHTML = score2;
-  j.children[3].innerHTML = over2;
-  }
-
-function clearHole (num3) {
-    console.log("invoked clear");
-var elem = document.getElementById(num3);
-elem.children[2].innerHTML = "-";
-elem.children[3].innerHTML = "-";
-
-  var count3 = 1;
-  var all3 = 0;
-  var par3= 0;
-  var score3 = 0;
-  var over3 = 0;
-  var currElem = document.getElementById("1");
-  while(count3 <= 18){
-    currElem = document.getElementById(count3);
-    if(currElem.children[2].innerHTML == "-"){
-
-    }
-    else{
-        all3 += 1;
-        par3 = par3 + Number.parseInt(currElem.children[1].innerHTML);
-        score3 = score3 + Number.parseInt(currElem.children[2].innerHTML);
-        over3 = over3 + Number.parseInt(currElem.children[3].innerHTML);
-    }
-    count3++;
-  }
-  var t = document.getElementById("Total");
-  t.children[0].innerHTML = all3;
-  t.children[1].innerHTML = par3;
-  t.children[2].innerHTML = score3;
-  t.children[3].innerHTML = over3;
+// create a new (default) "clubs" array
+function resetAllClubDistances() {
+	// create 2d global array, called "clubs" throughout app
+	// columns - 0: sortPosition, 1: clubAbbrev, 2: clubName, 
+	// 3: avgDist, 4: minDist, 5: maxDist, 6: numOfShots, 
+	// 7: loft/degrees, 8: typical/men, 9: typical/women
+	clubs = [
+		[ 199, "Dr",  "Driver",   0, 0, 0, 0, 10.5, 230, 200],
+		[ 300, "3+w", "3+ wood",  0, 0, 0, 0, 13.5, 210, 180],
+		[ 350, "3h",  "3 hybrid", 0, 0, 0, 0, 18.0, 180, 160],
+		// [ 399, "3i",  "3 iron",   0, 0, 0, 0, 18.5, 180, 160],
+		// [ 499, "4i",  "4 iron",   0, 0, 0, 0, 18.5, 170, 150],
+		[ 599, "5i",  "5 iron",   0, 0, 0, 0, 21.0, 160, 140],
+		[ 699, "6i",  "6 iron",   0, 0, 0, 0, 24.0, 150, 130],
+		[ 799, "7i",  "7 iron",   0, 0, 0, 0, 27.0, 140, 120],
+		[ 899, "8i",  "8 iron",   0, 0, 0, 0, 31.5, 130, 110],
+		[ 999, "9i",  "9 iron",   0, 0, 0, 0, 36.0, 120, 100],
+		[1099, "Pw",  "Pitching", 0, 0, 0, 0, 41.0, 110,  90],
+		[1199, "Aw",  "Approach", 0, 0, 0, 0, 46.0, 100,  80],
+		[1299, "Gw",  "Gap",      0, 0, 0, 0, 51.0,  90,  70],
+		[1399, "Sw",  "Sand",     0, 0, 0, 0, 56.0,  80,  60],
+		[1499, "Lw",  "Lob",      0, 0, 0, 0, 60.0,  60,  40],
+		[1599, "Ptr", "Putter",   0, 0, 0, 0, 60.0,   3,   3],
+  ];
+	// store the array in local storage
+	var str = JSON.stringify(clubs);
+	localStorage.setItem("clubs", str);
+	// and refresh screen
+	window.location.href = "clubDistanceList.html"; 
 }
-/* your mission: 
-1. make all the + buttons add 1 to the proper hole. 
-2. make all the - buttons subtract 1 from the proper hole.
-3. update the "Over" column to show the difference between par and score.
-4. update row #19 with appropriate totals. Note: if a person has not finished a round, then Over/Under should apply only to holes that have been updated.
-5. Add a new button, C, which clears the current score for a given hole
-6. advanced: put circles around birdies and squares around bogeys!
-*/
 
+// append one row to HTML table for each row in "clubs" array
+function appendTableRows() {
+	// select the HTML table 
+	var tbl = document.getElementById('clubTable'); 
+	// append one row to HTML table for each row in "clubs" array
+	for (var i = 0; i < clubs.length; i++) {
+		// create an empty row
+		var row = tbl.insertRow(i+1); // skip first row (column headings)
+		// create an empty cell for each column to appear in HTML table
+		var cell0 = row.insertCell(0); // clubAbbrev
+		var cell1 = row.insertCell(1); // avgDist
+		var cell2 = row.insertCell(2); // minDist
+		var cell3 = row.insertCell(3); // maxDist
+		var cell4 = row.insertCell(4); // numOfShots
+                var cell5 = row.insertCell(5); // ("+" button)
+                var cell6 = row.insertCell(6); // clubName
+		var cell7 = row.insertCell(7); // ("-" button)
+		// right align only the cells that need to be right aligned
+		cell0.className = "cmn_hidden"; // clubAbbrev
+		cell1.className = "cmn_alignRight cmn_fullHeight"; // avgDist
+		cell2.className = "cmn_alignRight cmn_hidden"; // minDist
+		cell3.className = "cmn_alignRight cmn_fullHeight"; // maxDist
+		cell4.className = "cmn_alignRight cmn_hidden"; // numOfShots
+                cell5.className = ""; // ("+" button)
+                cell6.className = "cmn_fullHeight";
+                cell7.className = ""; // ("-" button)
+		// populate HTML table with data from "clubs" array
+		cell0.innerHTML = clubs[i][1]; // clubAbbrev
+		cell1.innerHTML = Math.round(clubs[i][3]); // avgDist
+		cell2.innerHTML = Math.round(clubs[i][4]); // minDist
+		cell3.innerHTML = Math.round(clubs[i][5]); // maxDist
+		cell4.innerHTML = Math.round(clubs[i][6]); // numOfShots
+		cell5.innerHTML = "<button class='btn btn-success cmn_noPadding cmn_fullHeight' onclick='displayclubDistanceEntryForm(" + i + ");'>&nbsp;&nbsp;+&nbsp;&nbsp;</button>";
+                cell6.innerHTML = clubs[i][2]; // clubName
+                cell7.innerHTML = "<button class='btn btn-danger cmn_noPadding cmn_fullHeight' onclick='comingSoon();' >&nbsp;&nbsp;-&nbsp;&nbsp;</button>";
+		// cell6.innerHTML = clubs[i][2] + ", " + clubs[i][7] + "&deg;"; 
+	}
+}
+
+// navigate to "Distance Entry" screen
+function displayclubDistanceEntryForm(c) {
+	localStorage.setItem("club", c); // save chosen club
+	window.location.href = "clubDistanceEntry.html"; // redirect to entry form
+}
+
+// replace the current "clubs" array with the previous one
+function undoLastShot() {
+   var str = localStorage.getItem("clubsUndo");
+   localStorage.setItem("clubs", str);
+   window.location.href = "clubDistanceList.html"; 
+}
+
+// navigate to "About" screen
+function displayAbout() {
+	window.location.href = "clubAbout.html";
+}
+
+// navigate to "Penalty Info" screen
+function displayPenaltyInfo() {
+	window.location.href = "clubPenaltyInfo.html";
+}
+
+// ----- Functions (clubDistanceEntry.html) -----
+// features to add: pre-set distance buttons only "realistic" distances,
+// how many yards left/right of target, lie (fairway, rough, sand, trees),
+// add error checking for distances > 400
+
+// put precise numbers (not rounded) in stats HTML table
+function populateStatsTable() {
+	document.getElementById('cmn_club').innerHTML = '<strong>' + clubs[clubRow][1] + '</strong>'; 
+	document.getElementById('cmn_min').innerHTML = Math.round(clubs[clubRow][4]); 
+	document.getElementById('cmn_avg').innerHTML = '<strong>' + Math.round(clubs[clubRow][3]) + '</strong>'; 
+	document.getElementById('cmn_max').innerHTML = Math.round(clubs[clubRow][5]); 
+	document.getElementById('cmn_num').innerHTML = Math.round(clubs[clubRow][6]);  
+}
+
+// show fast-entry buttons in decrements of 5 yards
+function appendTapEntryButtons() {
+	// select whole cmn_tapEntry div
+	var teDiv = document.getElementById('cmn_tapEntryButtons'); 
+	// set reasonable range for tapEntry buttons
+	var variation = 30;
+	var avgDistPlusSome = Math.round(clubs[clubRow][3] + variation);
+	var avgDistMinusSome = Math.max(avgDistPlusSome - 2 * variation, 0);
+	// if club has average of zero, include many buttons
+	if (0==Math.round(clubs[clubRow][3])) {
+		avgDistPlusSome = 320;
+		avgDistMinusSome = 0;
+	}
+	// append buttons to div in decrements of 5 yards
+	for (var i = avgDistPlusSome; i > avgDistMinusSome; i -= 5) {
+		var btn = document.createElement("span");
+		btn.innerHTML = "<button class='cmn_noPadding cmn_fullHeight cmn_tapEntry' onclick='updateStats(" + i + ");'>" + i + "</button> ";
+		if(i==Math.round(clubs[clubRow][3])) { 
+			btn.innerHTML = "<button class='cmn_noPadding cmn_fullHeight cmn_tapEntry' onclick='updateStats(" + i + ");'><b>" + i + "</b></button> ";
+			btn.className = 'cmn_green';
+		}
+		teDiv.appendChild(btn); 
+	}
+}
+
+// update distances based on user-entered value, "shotDistance"
+function updateStats(shotDistance=0) {
+	// shotDistance can be user-entered by fast-entry button or by typed input
+	// if shotDistance==0 then shotDistance was entered by typed input,
+	// so must pull shotValue from getElementById('clubVal')
+	if(shotDistance==0)
+    shotDistance = parseInt(document.getElementById('clubVal').value);
+ 
+	if(parseInt(shotDistance) > 0) {
+		// save current clubs array for "Undo" functionality
+		var str = JSON.stringify(clubs);
+		localStorage.setItem("clubsUndo", str);
+		// update average
+		currentAverage = clubs[clubRow][3];
+		currentNumShots = clubs[clubRow][6];
+		newAverage = (currentAverage * currentNumShots + shotDistance) 
+			/ (currentNumShots + 1);
+		clubs[clubRow][3] = newAverage;
+		// update shot count
+		clubs[clubRow][6] += 1;
+		// update min
+		if (clubs[clubRow][4]==0 
+			|| shotDistance < clubs[clubRow][4]) clubs[clubRow][4] = shotDistance;
+		// update max
+		if (clubs[clubRow][5]==0 
+			|| shotDistance > clubs[clubRow][5]) clubs[clubRow][5] = shotDistance;
+		// save updated stats in local storage
+		var str = JSON.stringify(clubs);
+		localStorage.setItem("clubs", str);
+		// return to list screen
+		window.location.href = "clubDistanceList.html"; 
+	}
+}
+function addNewClub() {
+  var club = new Array(9);
+var getLength = JSON.parse(localStorage.getItem("clubs"));
+console.log(getLength.length);
+var n = getLength.length;
+if(n > 13){
+  alert("Warning: you are only allowed to carry 14 clubs in your golf bag in match play competition.");
+}
+var name = document.getElementById("clubName").value;
+if(name == ""){
+  name = "Club";
+}
+club[0] = 0;
+club[1] = "New";
+club[2] = name;
+club[3] = 0;
+club[4] = 0;
+club[5] = 0;
+club[6] = 0;
+club[7] = 0;
+club[8] = 0;
+club[9] = 0;
+getLength.push(club);
+console.log(getLength[n]);
+var str = JSON.stringify(getLength);
+localStorage.setItem("clubs", str);
+
+}
+
+// navigate to club distance list screen
+function cancelClub() {
+	window.location.href = "clubDistanceList.html"; 
+}
+
+// navigate to club distance list screen
+function displayClubEntry() {
+	window.location.href = "clubEntry.html"; 
+}
+function goBack(){
+  window.location.href = "clubDistanceList.html"
+}
