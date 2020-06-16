@@ -1,8 +1,46 @@
-.cmn_alignRight { text-align: right; }
-.cmn_hidden { display:none; }
-.cmn_green_bkgd { background-color: #CAFF33; }
-.cmn_green { color: green; }
-.cmn_fullHeight { font-size: 4vh }
-.cmn_moreHeight { height: 6vh; font-size: 4vh }
-.cmn_noPadding { padding: 0px; }
-.cmn_tapEntry { width: 50px; }
+div#container {text-align:center;}
+
+div#container h1 {/*font-size:2em;*/ text-align:center;}
+div#container h2 {font-size:1.5em;}
+
+div#container div#mobileMode {/*position:fixed; bottom:.1em; left:.1em;*/ min-width:100px; margin-top:.25em;}
+div#container div#mobileMode {/*background-color:#5cb85c; color:#EEE;*/ padding:.75em .5em; /* transition:opacity .25s;*/}
+div#container div#mobileMode::after {content:'Desktop Mode'; font-size:1rem;}
+div#container.mobileMode div#mobileMode::after {content:'Mobile Mode';}
+div#container div#mobileMode i {font-size:1.25em;}
+div#container div#mobileMode i.fa-toggle-off {display:inline-block;}
+div#container div#mobileMode i.fa-toggle-on {display:none;}
+div#container.mobileMode div#mobileMode i.fa-toggle-off {display:none;}
+div#container.mobileMode div#mobileMode i.fa-toggle-on {display:inline-block;}
+div#container div#mobileMode:hover {opacity:1;}
+/*div#container button#mobileMode::before {content:'Mobile';}*/
+/*div#container.mobileMode button#mobileMode::before {content:'Desktop';}*/
+
+div#container table#clubTable,
+div#container table#clubTable th,
+div#container table#clubTable td {text-align:center; /*border:1px solid #000;*/}
+div#container table#clubTable {margin-top:1em;}
+div#container table#clubTable th {background-color:#5cb85c; color:#000; /*border-color:#4cae4c;*/}
+div#container table#clubTable button {padding:0 .5em .1em; margin:0 .25em;}
+
+div#container table#CMN_messageTable {text-align:left;}
+
+div#container table#CMN_statsTable,
+div#container table#CMN_statsTable th,
+div#container table#CMN_statsTable td {text-align:center;}
+
+div#container .CMN_right {/*text-align:right;*/}
+div#container.mobileMode .CMN_hidden {display:none;}
+div#container .CMN_green_bg {background-color:#caff33;}
+div#container .CMN_green {color:green;}
+div#container .CMN_bold {font-weight:bold;}
+div#container.mobileMode .CMN_fullHeight {font-size:3vh; /*font-size:2em;*/}
+div#container.mobileMode .CMN_moreHeight {height:6vh; font-size:3vh; /*font-size:2em;*/}
+div#container .CMN_noPadding {padding:0;}
+div#container .CMN_tapEntry {min-width:50px;}
+
+div#container div.buttonBox {margin:1em 0;}
+div#container div.buttonBox button.btn {font-size:1.5em;}
+/*div#container.mobileMode div.buttonBox button {padding:1em 2em;}*/
+div#container hr {border-width:.5px; margin:1em;}
+div#container footer {}
