@@ -1,46 +1,41 @@
-div#container {text-align:center;}
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link href="clubMeNow.png" rel="icon" type="image/png"/>
+		<title>ClubMeNow - About</title>
 
-div#container h1 {/*font-size:2em;*/ text-align:center;}
-div#container h2 {font-size:1.5em;}
+		<!-- Bootstrap 3 -->
+		<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/> -->
+		<link href="https://atg973.github.io/bs3/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script> -->
+		<!-- <script src="https://atg973.github.io/bs3/jquery.min.js" type="text/javascript"></script> -->
+		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script> -->
+		<!-- <script src="https://atg973.github.io/bs3/bootstrap.min.js" type="text/javascript"></script> -->
+		
+		<!-- ClubMeNow Custom CSS -->
+		<link href="clubMeNow.css" rel="stylesheet"/>
+	</head>
+	<body>
 
-div#container div#mobileMode {/*position:fixed; bottom:.1em; left:.1em;*/ min-width:100px; margin-top:.25em;}
-div#container div#mobileMode {/*background-color:#5cb85c; color:#EEE;*/ padding:.75em .5em; /* transition:opacity .25s;*/}
-div#container div#mobileMode::after {content:'Desktop Mode'; font-size:1rem;}
-div#container.mobileMode div#mobileMode::after {content:'Mobile Mode';}
-div#container div#mobileMode i {font-size:1.25em;}
-div#container div#mobileMode i.fa-toggle-off {display:inline-block;}
-div#container div#mobileMode i.fa-toggle-on {display:none;}
-div#container.mobileMode div#mobileMode i.fa-toggle-off {display:none;}
-div#container.mobileMode div#mobileMode i.fa-toggle-on {display:inline-block;}
-div#container div#mobileMode:hover {opacity:1;}
-/*div#container button#mobileMode::before {content:'Mobile';}*/
-/*div#container.mobileMode button#mobileMode::before {content:'Desktop';}*/
+		<div id="container" class="container">
+			<h2>ClubMeNow version 1.0.0</h2>
+			<button class="btn btn-info" onclick="cancelEntry();">Back</button>
 
-div#container table#clubTable,
-div#container table#clubTable th,
-div#container table#clubTable td {text-align:center; /*border:1px solid #000;*/}
-div#container table#clubTable {margin-top:1em;}
-div#container table#clubTable th {background-color:#5cb85c; color:#000; /*border-color:#4cae4c;*/}
-div#container table#clubTable button {padding:0 .5em .1em; margin:0 .25em;}
+			<hr>
 
-div#container table#CMN_messageTable {text-align:left;}
+			<footer>
+				<p>
+					CIS 255 (Spring 2020)<br>
+					Saginaw Valley State University<br>
+					Copyright &copy; 2019 George Corser
+				</p>
+			</footer>
+		</div>
 
-div#container table#CMN_statsTable,
-div#container table#CMN_statsTable th,
-div#container table#CMN_statsTable td {text-align:center;}
+		<!-- ClubMeNow Custom JS -->
+		<script src="clubMeNow.js" type="text/javascript"></script>
 
-div#container .CMN_right {/*text-align:right;*/}
-div#container.mobileMode .CMN_hidden {display:none;}
-div#container .CMN_green_bg {background-color:#caff33;}
-div#container .CMN_green {color:green;}
-div#container .CMN_bold {font-weight:bold;}
-div#container.mobileMode .CMN_fullHeight {font-size:3vh; /*font-size:2em;*/}
-div#container.mobileMode .CMN_moreHeight {height:6vh; font-size:3vh; /*font-size:2em;*/}
-div#container .CMN_noPadding {padding:0;}
-div#container .CMN_tapEntry {min-width:50px;}
-
-div#container div.buttonBox {margin:1em 0;}
-div#container div.buttonBox button.btn {font-size:1.5em;}
-/*div#container.mobileMode div.buttonBox button {padding:1em 2em;}*/
-div#container hr {border-width:.5px; margin:1em;}
-div#container footer {}
+	</body>
+</html>
